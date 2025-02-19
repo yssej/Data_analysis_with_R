@@ -1,0 +1,18 @@
+produit <- read.csv("Data-Produit.csv", header=TRUE,sep=',', dec='.')
+getwd()
+produit <- read.csv("Data-Produit.csv", header=TRUE,sep=',', dec='.')
+produit <- read.csv("Data-Produit.csv", header=TRUE,sep=',', dec='.', as.factor = T)
+produit <- read.csv("Data-Produit.csv", header=TRUE,sep=',', dec='.', stringsAsFactors = T)
+produit_EA <- produit[1:400,]
+produit_ET <- produit[401:600,]
+produit_EA <- produit_EA[,-1]
+library(rpart)
+library(C50)
+library(tree)
+? rpart
+tree_rp1_s <- rpart(Produit~., produit_EA)
+tree_rp1 <- rpart(Produit~., produit_EA, control = rpart.control(minbucket = 10), parms = list(split = "gini"))
+plot(tree_rp1)
+text(tree_rp1, pretty = 0)
+plot(tree_rp1-s)
+text(tree_rp1_s, pretty = 0)
